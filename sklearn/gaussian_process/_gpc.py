@@ -629,7 +629,7 @@ class GaussianProcessClassifier(ClassifierMixin, BaseEstimator):
                              ensure_2d=True, dtype="numeric")
         else:
             X, y = check_X_y(X, y, multi_output=False,
-                             ensure_2d=False, dtype=None)
+                             ensure_2d=False, allow_nd=True, dtype=None)
 
         self.base_estimator_ = _BinaryGaussianProcessClassifierLaplace(
             self.kernel, self.optimizer, self.n_restarts_optimizer,
@@ -688,7 +688,7 @@ class GaussianProcessClassifier(ClassifierMixin, BaseEstimator):
         if self.kernel is None or self.kernel.requires_vector_input:
             X = check_array(X, ensure_2d=True, dtype="numeric")
         else:
-            X = check_array(X, ensure_2d=False, dtype=None)
+            X = check_array(X, ensure_2d=False, allow_nd=True, dtype=None)
 
         return self.base_estimator_.predict(X)
 
@@ -718,7 +718,7 @@ class GaussianProcessClassifier(ClassifierMixin, BaseEstimator):
         if self.kernel is None or self.kernel.requires_vector_input:
             X = check_array(X, ensure_2d=True, dtype="numeric")
         else:
-            X = check_array(X, ensure_2d=False, dtype=None)
+            X = check_array(X, ensure_2d=False, allow_nd=True, dtype=None)
 
         return self.base_estimator_.predict_proba(X)
 
