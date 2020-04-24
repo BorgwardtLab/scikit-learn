@@ -61,7 +61,16 @@ def _assert_all_finite(X, allow_nan=False, msg_dtype=None):
             )
     # for object dtype data, we only check for NaNs (GH-13254)
     elif X.dtype == np.dtype('object') and not allow_nan:
-        if _object_dtype_isnan(X).any():
+        isnan = _object_dtype_isnan(X)
+
+        # ensures that `any()` is only called if the object type is an
+        # array for which the function is defined.
+        if type(isnan) is np.ndarray:
+            if isnan.any():
+                raise ValueError("Input contains NaN")
+        # defaults to checking the variable, assuming that it is
+        # possible to convert to `bool`.
+        elif isnan:
             raise ValueError("Input contains NaN")
 
 
