@@ -256,6 +256,7 @@ def setup_package():
                     cmdclass=cmdclass,
                     python_requires=">=3.5",
                     install_requires=[
+                        'cython>=0.29',  # FIXME
                         'numpy>={}'.format(NUMPY_MIN_VERSION),
                         'scipy>={}'.format(SCIPY_MIN_VERSION),
                         'joblib>={}'.format(JOBLIB_MIN_VERSION)
